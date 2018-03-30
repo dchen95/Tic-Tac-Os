@@ -42,9 +42,14 @@ function markBox(clickedId) {
     console.log("Button clicked # " + clickedId);
     console.log("currentPlayer: " + currentPlayer);
     
-    if (currentPlayer == 1) {
-        $(this).textContent("X") // flip this box to "X" image
-        var boxMarked = $(this.id).val();
+    if (currentPlayer == 0) {
+        var test = parseInt(clickedId);
+        console.log("test:  " + test);
+        
+        $('#' + clickedId).text("X"); // flip this box to "X" image
+        console.log("$('clickedID') current value = " + $('#clickedId').text);
+        
+        var boxMarked = clickedId;
         console.log("Number of box marked: " + boxMarked);
         
         player1Selections.push()
