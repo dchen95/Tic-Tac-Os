@@ -1,4 +1,3 @@
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDZ8r0uAB4Q5c20UE3na58N4nGTs4YLrqA",
@@ -22,63 +21,121 @@ var player2Name;
 
 // ==========================================
 
-var winners = [];
+var winners = []; // stores winning combinations
 var player1Selections = [];
 var player2Selections = [];
-var currentPlayer;
-var move = 0;
-var player1score = 0;    // player 1 points
-var player2score = 0;    // player 2 points
+var currentPlayer = 1;
+var player1score = 0;
+var player2score = 0;
 
 // Accept players' names input
-player1Name = $('#player1-name').val().trim();
-player2Name = $('#player2-name').val().trim();
-
-// Select player to start at random 
-currentPlayer = Math.floor((Math.random() * 2) + 1);
+player1Name = $('#player1-name').text().trim();
+player2Name = $('#player2-name').text().trim();
 
 
 
-// =====================================================
 
-var handler = function(e) {
+//==================================================
+
+
+function markBox(clickedId) {
+    console.log("Button clicked # " + clickedId);
+    console.log(currentPlayer: " + currentPlayer);
+    
     if (currentPlayer == 1) {
-        this.innerHTML = "X";
-        player1Selections.push(parseInt(this.id));
-        player1Selections.sort(function(a, b) { return a - b });
+        $(this).textContent("X") // flip this box to "X" image
+        var boxMarked = $(this.id).val();
+        console.log("Number of box marked: " + boxMarked);
+        
+        player1Selections.push()
     }
-    else {
-        this.innerHTML = "O";
-        player2Selections.push(parseInt(this.id));
-        player2Selections.sort(function(a, b) { return a - b });
+}
+
+
+
+
+
+function winningCombos()
+{
+    winners.push([1, 2, 3]);
+    winners.push([4, 5, 6]);
+    winners.push([7, 8, 9]);
+    winners.push([1, 4, 7]);
+    winners.push([2, 5, 8]);
+    winners.push([3, 6, 9]);
+    winners.push([1, 5, 9]);
+    winners.push([3, 5, 7]);
+}
+
+// original model below vvvv =================================
+
+
+var winners = new Array();
+var player1Selections = new Array();
+var player2Selections = new Array();
+var timer;
+var numberOfPlayers = 2;
+var currentPlayer = 0;
+var move = 0;
+var points1 = 0;    // player 1 points
+var points2 = 0;    // player 2 points
+var size = 3;
+
+function drawBoard() {
+    var Parent = document.getElementById("game");
+    var counter = 1;
+    
+    while (Parent.hasChildNodes()) {
+        Parent.removeChild(Parent.firstChild);
     }
 
-    move++;
-    var isWin = checkWinner();
+    for (s = 0; s < 3; s++) {
+        var row = document.createElement("tr");
+        
+        for (r = 0; r < 3; r++) {
+            var col = document.createElement("td");
+            col.id = counter;
+            col.innerHTML = counter;
 
-    if (isWin)
-    {
-        if(currentPlayer == 0)
-            player1score++;
-        else
-            points2++;
+            var handler = function(e) {
+                if (currentPlayer == 0) {
+                    this.innerHTML = "X";
+                    player1Selections.push(parseInt(this.id));
+                    player1Selections.sort(function(a, b) { return a - b });
+                }
 
-        document.getElementById("player1").innerHTML = player1score;
-        document.getElementById("player2").innerHTML = points2;
+                else {
+                    this.innerHTML = "O";
+                    player2Selections.push(parseInt(this.id));
+                    player2Selections.sort(function(a, b) { return a - b });
+                }
 
-        reset();
-        drawBoard();
-    }
+                move++;
+                var isWin = checkWinner();
 
-    else
-    {
-        if (currentPlayer == 0)
-            currentPlayer = 1;
-        else
-            currentPlayer = 0;
-        this.removeEventListener('click', arguments.callee);
-    }
-};
+                if (isWin)
+                {
+                    if(currentPlayer == 0)
+                        points1++;
+                    else
+                        points2++;
+
+                    document.getElementById("player1").innerHTML = points1;
+                    document.getElementById("player2").innerHTML = points2;
+
+                    reset();
+                    drawBoard();
+                }
+
+                else
+                {
+                    if (currentPlayer == 0)
+                        currentPlayer = 1;
+                    else
+                        currentPlayer = 0;
+                    this.removeEventListener('click', arguments.callee);
+                }
+            };
 
             col.addEventListener('click', handler);
 
@@ -122,7 +179,7 @@ function checkWinner() {
     else
 	playerSelections = player2Selections;
     
-    if (playerSelections.length >= wide) {
+    if (playerSelections.length >= size) {
         // check if any 'winners' are also in your selections
         
         for (i = 0; i < winners.length; i++) {
@@ -159,3 +216,31 @@ function checkWinner() {
 
     return win;
 } 
+
+// window.onload = drawBoard;
+// </script>
+// </head>
+
+// <body>
+// <div style="text-align:center;margin:0 auto;width:50%;padding-top:20px;">
+// <br/>
+// <div style="float:left;">
+// Player 1
+
+// <div style="font-size:30pt;" id="player1">
+// 0
+// </div>
+// </div>
+
+// <table id="game" style="float:left;margin-left:20px;">
+// </table>
+
+// <div style="float:left;margin-left:20px;">
+// Player 2
+// <div id="player2" style="font-size:30pt;">0</div>
+// </div>
+
+// <div class="clear"></div>
+// </div>
+// </body>
+// </html> 
