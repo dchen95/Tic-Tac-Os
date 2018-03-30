@@ -40,7 +40,7 @@ player2Name = $('#player2-name').text().trim();
 
 function markBox(clickedId) {
     console.log("Button clicked # " + clickedId);
-    console.log(currentPlayer: " + currentPlayer);
+    console.log("currentPlayer: " + currentPlayer);
     
     if (currentPlayer == 1) {
         $(this).textContent("X") // flip this box to "X" image
