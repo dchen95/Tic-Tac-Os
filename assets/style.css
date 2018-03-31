@@ -1,109 +1,86 @@
+
+#page-container {
+  background: white;
+}
 .container {
-    background-color: #29335C;
+    background: white;
+}
+
+#header {
+    background: white;
+    height: 120px;
+}
+
+/* flexbox - gameboard */
+#main-content {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#game-board {
+  
+  
+}
+#game-board-table {
+  
+}
+
+table, tr, td {
+  margin: 10px 10px 10px 10px;
+}
+
+
+.tiles {
+  color: white;
+  width: 120px;
+  height: 120px;
+  background:darkolivegreen;
+  border-radius: 5px;
+
+}
+
+p {
+    font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 h1 {
-    color: white;
-}
-
-h2 {
-    color: white;
-}
-.game {
-    flex: 1;
-    background-color: transparent;
-    width: 402px;
-    height: 402px;
-    margin: 50px auto;
-}
-
-.game-field {
-  width: 134px;
-  height: 134px;
-  display: block;
-  float: left;
-  color: #EAEAEA;
-  font-size: 6.3em;
-  padding: 1px 27px;
+  font-size: 60px;
+  font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
 }
 
 #player1 {
-    flex: 2;
+    
 }
 
 #player2 {
-    flex: 2;
+    
 }
 
-.win {
-  color: #E4572E;
-  transition: 200ms;
+/* --------------- Media Queries -------------- */
+
+/* @media (min-width: 769px) {
+  .main-header {
+    display: flex;
+  .row{
+    width: 90%;
+    margin: 0 auto;
+  }
+  .tagline {
+    font-size: 1.4em;
+  }
 }
 
-#first, #second, #third {
-  border-bottom: 3px solid #525B76;
-}
-
-#second {
-  border-left: 3px solid #525B76;
-  border-right: 3px solid #525B76;
-}
-
-#fourth, #fifth, #sixth {
-  border-bottom: 3px solid #525B76;
-}
-
-#fifth {
-  border-left: 3px solid #525B76;
-  border-right: 3px solid #525B76;
-}
-
-#eight {
-  border-left: 3px solid #525B76;
-  border-right: 3px solid #525B76;
-}
-
-.modal-content {
-  background-color: #EAEAEA;
-}
-
-.modal-header {
-  background-color: #29335C;
-  width: 100%;
-  height: 100%;
-  color: #EAEAEA;
-}
-.modal-header button {
-  color: #EAEAEA;
-}
-.modal-header button:hover {
-  color: #EAEAEA;
-}
-.modal-header h4 {
-  font-size: 2.3em;
-}
-
-.modal-body {
-  padding: 30px;
-  margin: 10px 0;
-  text-align: center;
-}
-
-.modal-footer {
-  padding: 10px 80px 10px 0px;
-}
-.modal-footer button {
-  background-color: white;
-  color: black;
-  width: 40%;
-  font-size: 2em;
-  transition: 500ms;
-}
-.modal-footer button:hover {
-  background-color: #E4572E;
-  color: white;
-}
-
-.signature {
-  padding-top: 10px;
-}
+@media (min-width: 1025px) {
+  .main-header,
+  .row{
+    width: 90%;
+    margin: 0 auto;
+  }
+  .tagline {
+    font-size: 1.4em;
+  }
+} */
