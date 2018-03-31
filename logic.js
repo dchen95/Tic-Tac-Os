@@ -27,6 +27,7 @@ var currentPlayer = 1;
 var player1score = 0;
 var player2score = 0;
 var numberMoves = 0; // tracks total number clicks in game; calculations begin after 5 clicks
+var gameOver = 0;
 
 // Accept players' names input
 player1Name = $('#player1-name').text().trim();
@@ -84,6 +85,7 @@ function playGame(clickedId) {
                     (currentState[c] == "X"))
                     {
                     $('#subtitle').text("Player 1 wins");
+                    gameOver = 1;
                     break;
                 }
                 else if 
@@ -92,13 +94,16 @@ function playGame(clickedId) {
                     (currentState[c] == "O"))
                     {
                     $('#subtitle').text("Player 2 wins");
+                    gameOver = 1;
                     break;
                 }
 
             }
 
         numberMoves++;
-        if (numberMoves = 9) && 
+        if ((numberMoves = 9) && (gameOver == 0)) {
+            $('#subtitle').text("It's a tie!");
+        };
     }
 
 }
