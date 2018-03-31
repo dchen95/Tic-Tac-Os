@@ -7,7 +7,7 @@
 }
 
 #header {
-    background: white;
+    background: skyblue;
     height: 120px;
 }
 
@@ -29,8 +29,13 @@
   
 }
 
-table, tr, td {
+table, tr {
   margin: 10px 10px 10px 10px;
+}
+
+td {
+  border: 3px solid black;
+  margin: 15px
 }
 
 
@@ -38,9 +43,15 @@ table, tr, td {
   color: white;
   width: 120px;
   height: 120px;
-  background:darkolivegreen;
-  border-radius: 5px;
+  background:blue;
+  border-radius: 0px;
+  margin: 15px;
 
+}
+
+.tile-3 {
+  background: purple;
+  margin: 20px;
 }
 
 p {
