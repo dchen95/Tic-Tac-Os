@@ -22,11 +22,11 @@
 }
 
 #game-board {
-  
-  
+
+
 }
 #game-board-table {
-  
+
 }
 
 table, tr {
@@ -54,6 +54,18 @@ td {
   margin: 20px;
 }
 
+.front {
+  background-color: #262626;
+  /* padding:0px; */
+}
+
+.card {
+  width: 120px;
+  height:120px;
+}
+
+
+
 p {
     font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
 }
@@ -64,11 +76,11 @@ h1 {
 }
 
 #player1 {
-    
+
 }
 
 #player2 {
-    
+
 }
 
 /* --------------- Media Queries -------------- */
