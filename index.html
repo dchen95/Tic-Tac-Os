@@ -1,61 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tic-Tac-Toe Professional</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic-Tac-Os</title>
+    <!-- Framework links that Malik found goes here-->
+
+    <!-- Our linked CSS sheet -->
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 
-<!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Fontawesome -->
-<!-- <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script> -->
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- My CSS -->
-<link rel="stylesheet" href="assets/style.css">
-
-<!-- Firebase reference -->
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-
-
 <body>
+    <!-- Page Container -->
+    <div id="page-container" class="container">
 
-    <div class="container">
-        <div class="header text-center">
-            <h1>Welcome to the Tic Tac Toe Game</h1>
-            <h2>Let's Roll!</h2>
-        </div>
-      
-        <div> <!-- game board -->
-            <div class="player1" style="float: left">
-                <h2>Your turn</h2>
+        <!-- Header -->
+            <header id="header" class="main-header">
+                <!-- insert logo image here -->
+                <h1>Tic-Tac-Os</h1>
+                <p>An interactive Tic-Tac-Toe game that you can play against other people in the world.</p>
+            </header>
+
+        <!-- Main Content (Game Board) -->
+            <div id="main-content" class="container">
+                <div id="player1">
+                    <h1 id="x">X</h1>
+                    <br>
+                    <p>Player 1</p>
+                </div>
+                <div id="game-board">
+                    <!-- Gameboard as <table> goes here -->
+                    <table id="game-board-table">
+                        <tr>
+                            <td class="tile-1 tiles">1</td>
+                            <td class="tile-2 tiles">2</td>
+                            <td class="tile-3 tiles">3</td>
+                        </tr>
+                        <tr>
+                            <td class="tile-4 tiles">4</td>
+                            <td class="tile-5 tiles">5</td>
+                            <td class="tile-6 tiles">6</td>
+                        </tr>
+                        <tr>
+                            <td class="tile-7 tiles">7</td>
+                            <td class="tile-8 tiles">8</td>
+                            <td class="tile-9 tiles">9</td>
+                        </tr>
+                    <!-- <div class="tile-1 tiles">1</div> -->
+                    <!-- <div class="tile-2 tiles">2</div> -->
+                    <!-- <div class="tile-3 tiles">3</div> -->
+                    <!-- <div class="tile-4 tiles">4</div> -->
+                    <!-- <div class="tile-5 tiles">5</div> -->
+                    <!-- <div class="tile-6 tiles">6</div> -->
+                    <!-- <div class="tile-7 tiles">7</div> -->
+                    <!-- <div class="tile-8 tiles">8</div> -->
+                    <!-- <div class="tile-9 tiles">9</div> -->
+                    </table>
+                </div>
+                <div id="player2">
+                    <h1 id="o">O</h1>
+                    <br>
+                    <p>Player 2</p>
+                </div>
+                </div>
             </div>
-    
-            <div class="game">
-              <div id="1" onClick="markBox(this.id)" class="game-field">1</div>
-              <div id="2" onClick="markBox(this.id)" class="game-field">2</div>
-              <div id="3" onClick="markBox(this.id)" class="game-field">3</div>
-              <div id="4" onClick="markBox(this.id)" class="game-field">4</div>
-              <div id="5" onClick="markBox(this.id)" class="game-field">5</div>
-              <div id="6" onClick="markBox(this.id)" class="game-field">6</div>
-              <div id="7" onClick="markBox(this.id)" class="game-field">7</div>
-              <div id="8" onClick="markBox(this.id)" class="game-field">8</div>
-              <div id="9" onClick="markBox(this.id)" class="game-field">9</div>
-            </div>
-    
-            <div class="player2" style="float: right">
-                <h2>Your turn</h2>
-            </div>
-        </div>
 
-        </div>
-      </div>
+    </div>
 
 
-<!-- JavaScript -->
-<script src="logic.js"></script>
+    <!-- JavaScript -->
+    <script src="assets/javascript/tictactoe.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
 
 </body>
 </html>
