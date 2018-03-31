@@ -27,11 +27,11 @@ var player2Selections = [];
 var currentPlayer = 1;
 var player1score = 0;
 var player2score = 0;
+var numberMoves = 0; // tracks total number clicks in game; calculations begin after 5 clicks
 
 // Accept players' names input
 player1Name = $('#player1-name').text().trim();
 player2Name = $('#player2-name').text().trim();
-
 
 
 
@@ -41,38 +41,51 @@ player2Name = $('#player2-name').text().trim();
 function markBox(clickedId) {
     console.log("Button clicked # " + clickedId);
     console.log("currentPlayer: " + currentPlayer);
+
+    numberMoves++;
+
+    console.log("currentPlayer:  " + currentPlayer);
+    
     
     if (currentPlayer == 0) {
-        var test = parseInt(clickedId);
-        console.log("test:  " + test);
+        // var test = parseInt(clickedId);
+        // console.log("test:  " + test);
         
+        console.log('clickedId = ' + clickedId);
         $('#' + clickedId).text("X"); // flip this box to "X" image
-        console.log("$('clickedID') current value = " + $('#clickedId').text);
-        
-        var boxMarked = clickedId;
-        console.log("Number of box marked: " + boxMarked);
-        
-        player1Selections.push()
+                
+        player1Selections.push(clickedId);
+        console.log('player1Selections:  ' + player1Selections);
     }
-}
+    else {
+        player2Selections.push(clickedId);
+        console.log('player2Selections:  ' + player1Selections);
+    }
+
+    if (numberMoves > 4) { // only start checking after 5 clicks
+
+
+    }
+};
 
 
 
 
 
-function winningCombos()
-{
-    winners.push([1, 2, 3]);
-    winners.push([4, 5, 6]);
-    winners.push([7, 8, 9]);
-    winners.push([1, 4, 7]);
-    winners.push([2, 5, 8]);
-    winners.push([3, 6, 9]);
-    winners.push([1, 5, 9]);
-    winners.push([3, 5, 7]);
-}
+function loadWiningCombos() {
+    winningCombos.push([1, 2, 3]);
+    winningCombos.push([4, 5, 6]);
+    winningCombos.push([7, 8, 9]);
+    winningCombos.push([1, 4, 7]);
+    winningCombos.push([2, 5, 8]);
+    winningCombos.push([3, 6, 9]);
+    winningCombos.push([1, 5, 9]);
+    winningCombos.push([3, 5, 7]);
+};
 
+//============================================================
 // original model below vvvv =================================
+//============================================================
 
 
 var winners = new Array();
