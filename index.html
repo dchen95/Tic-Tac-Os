@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic-Tac-Os</title>
     <!-- Framework links that Malik found goes here-->
-
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <!-- Our linked CSS sheet -->
     <link rel="stylesheet" href="assets/reset.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -41,39 +41,39 @@
                     <!-- Gameboard as <table> goes here -->
                     <table id="game-board-table">
                         <tr>
-                            <td class="tile-1 tiles">
+                            <td class="tile-1 tiles"id="0" onClick="playGame(this.id)">
 
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                 <img src="assets/images/Obutton.jpg" alt="">
                                 </div>
                               </div>
 
                             </td>
 
-                            <td class="tile-2 tiles">
+                            <td class="tile-2 tiles" id="1" onClick="playGame(this.id)">
 
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Xbutton.jpg" alt="">
                                 </div>
                               </div>
 
                             </td>
 
-                            <td class="tile-3 tiles">
+                            <td class="tile-3 tiles" id="2" onClick="playGame(this.id)">
 
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Obutton.jpg" alt="">
                                 </div>
                               </div>
@@ -82,34 +82,34 @@
 <!--Second Row -->
 
                         <tr>
-                            <td class="tile-4 tiles">
+                            <td class="tile-4 tiles" id="3" onClick="playGame(this.id)">
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Obutton.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
-                            <td class="tile-5 tiles">
+                            <td class="tile-5 tiles" id="4" onClick="playGame(this.id)">
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Xbutton.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
-                            <td class="tile-6 tiles">
+                            <td class="tile-6 tiles" id="5" onClick="playGame(this.id)">
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Xbutton.jpg" alt="">
                                 </div>
                               </div>
@@ -117,34 +117,34 @@
                         </tr>
     <!-- Third Row -->
                         <tr>
-                            <td class="tile-7 tiles">
+                            <td class="tile-7 tiles" id="6" onClick="playGame(this.id)">
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Obutton.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
-                            <td class="tile-8 tiles">
+                            <td class="tile-8 tiles" id="7" onClick="playGame(this.id)">
                               <div class="card">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div class="back">
+                                <div class="back" >
                                   <img src="assets/images/Obutton.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
-                              <td class="tile-9 tiles">
+                              <td class="tile-9 tiles" id="8" onClick="playGame(this.id)">
                                 <div class="card">
                                   <div class="front">
                                     <!-- <p>FRONT CONTENT</p> -->
                                   </div>
-                                  <div class="back">
+                                  <div class="back" >
                                     <img src="assets/images/Xbutton.jpg" alt="">
                                   </div>
                                 </div>
@@ -176,7 +176,6 @@
     <script src="logic.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script type="text/javascript">
 
     $(".card").flip({
