@@ -44,6 +44,7 @@ function playGame(clickedId) {
     console.log("Button clicked # " + clickedId);
     console.log("currentPlayer: " + currentPlayer);
 
+    gameOver = 0;
     numberMoves++;
 
     console.log("currentPlayer:  " + currentPlayer);
@@ -85,31 +86,28 @@ function playGame(clickedId) {
                     (currentState[c] == "X"))
                     {
                     $('#subtitle').text("Player 1 wins");
+                    player1score++;  // add point to Player1
                     gameOver = 1;
                     break;
                 }
                 else if 
-                    ((currentState[a] == "O") &&
-                    (currentState[b] == "O") &&
-                    (currentState[c] == "O"))
-                    {
+                ((currentState[a] == "O") &&
+                (currentState[b] == "O") &&
+                (currentState[c] == "O"))
+                {
                     $('#subtitle').text("Player 2 wins");
+                    player2score++;  // add point to Player2
                     gameOver = 1;
                     break;
                 }
 
-            }
-
-        numberMoves++;
-        if ((numberMoves = 9) && (gameOver == 0)) {
+            }        
+        if ((numberMoves = 9) && (gameOver == 0)) {  // conditions for a tie
             $('#subtitle').text("It's a tie!");
         };
     }
 
 }
-
-
-
 
 
 function loadWinningCombos() {
@@ -122,4 +120,8 @@ function loadWinningCombos() {
     winningCombos.push([0, 4, 8]);
     winningCombos.push([2, 4, 6]);
 };
+
+function nextGame() {
+    
+}
 
