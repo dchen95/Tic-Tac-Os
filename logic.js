@@ -1,15 +1,16 @@
+
 // Initialize Firebase
-  var config = {
+var config = {
     apiKey: "AIzaSyCFsMk-UOJWmYptPKgD46tV6ONa-AtrEBA",
     authDomain: "tic-tac-os.firebaseapp.com",
     databaseURL: "https://tic-tac-os.firebaseio.com",
     projectId: "tic-tac-os",
     storageBucket: "tic-tac-os.appspot.com",
     messagingSenderId: "622288172534"
-  };
-  firebase.initializeApp(config);
-
-var database = firebase.database();
+};
+firebase.initializeApp(config);
+    
+  var database = firebase.database();
 
 // Branches to store each player's actions
 var player1 = database.ref("/player1");
@@ -22,18 +23,18 @@ var player2Name;
 // ==========================================
 
 var winningCombos = []; // stores winning combinations
-var currentState = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
-var currentPlayer = 1;
+var currentState = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]; // current state of game board
+var currentPlayer = 1; // tracks whose turn it is
 var player1score = 0;
 var player2score = 0;
 var numberMoves = 0; // tracks total number clicks in game; calculations begin after 5 clicks
-var gameOver = 0;
+var gameWon = 0;  // if this variable remains at "0" at game end, the game was a tie
 
 // Accept players' names input
 player1Name = $('#player1-name').text().trim();
 player2Name = $('#player2-name').text().trim();
 
-loadWinningCombos();
+loadWinningCombos();  // load array of winning combos
 console.log(winningCombos);
 
 
@@ -44,6 +45,7 @@ function playGame(clickedId) {
     console.log("Button clicked # " + clickedId);
     console.log("currentPlayer: " + currentPlayer);
 
+    gameWon = 0;
     numberMoves++;
 
     console.log("currentPlayer:  " + currentPlayer);
@@ -56,6 +58,7 @@ function playGame(clickedId) {
                 
         currentState.splice(clickedId, 1, "X");  // save play in array position [clickedID]
         console.log('currentState:  ' + currentState);
+
 
         currentPlayer = 2;
     }
@@ -85,31 +88,28 @@ function playGame(clickedId) {
                     (currentState[c] == "X"))
                     {
                     $('#subtitle').text("Player 1 wins");
-                    gameOver = 1;
+                    player1score++;  // add point to Player1
+                    gameWon = 1;
                     break;
                 }
                 else if 
-                    ((currentState[a] == "O") &&
-                    (currentState[b] == "O") &&
-                    (currentState[c] == "O"))
-                    {
+                ((currentState[a] == "O") &&
+                (currentState[b] == "O") &&
+                (currentState[c] == "O"))
+                {
                     $('#subtitle').text("Player 2 wins");
-                    gameOver = 1;
+                    player2score++;  // add point to Player2
+                    gameWon = 1;
                     break;
                 }
 
-            }
-
-        numberMoves++;
-        if ((numberMoves = 9) && (gameOver == 0)) {
+            }        
+        if ((numberMoves = 9) && (gameWon == 0)) {  // conditions for a tie
             $('#subtitle').text("It's a tie!");
         };
     }
 
 }
-
-
-
 
 
 function loadWinningCombos() {
@@ -123,3 +123,9 @@ function loadWinningCombos() {
     winningCombos.push([2, 4, 6]);
 };
 
+function flipCard() {
+    $(".card").flip({
+        axis: "y",
+        trigger: "click"
+    });
+};
