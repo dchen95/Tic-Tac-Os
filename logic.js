@@ -30,8 +30,8 @@ var numberMoves = 0; // tracks total number clicks in game; calculations begin a
 var gameOver = 0;
 
 // Accept players' names input
-player1Name = $('#player1-name').text().trim();
-player2Name = $('#player2-name').text().trim();
+// player1Name = $('#player1-name').text().trim();
+// player2Name = $('#player2-name').text().trim();
 
 loadWinningCombos();
 console.log(winningCombos);
@@ -107,11 +107,6 @@ function playGame(clickedId) {
     }
 
 }
-
-
-
-
-
 function loadWinningCombos() {
     winningCombos.push([0, 1, 2]);
     winningCombos.push([3, 4, 5]);
