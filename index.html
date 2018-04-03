@@ -23,10 +23,11 @@
     <div id="page-container" class="container">
 
         <!-- Header -->
-            <header id="header" class="main-header">
+            <header id="header" class="main-header text-center">
                 <!-- insert logo image here -->
                 <h1>Tic-Tac-Os</h1>
                 <p>An interactive Tic-Tac-Toe game that you can play against other people in the world.</p>
+                <h2 id="subtitle">Click to start!</h2>
             </header>
 
         <!-- Main Content (Game Board) -->
@@ -49,13 +50,12 @@
                         <tr>
                             <td class="tiles">
 
-                              <div class="card">
+                              <div id="card1">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                <img id="tile-1" onClick="playGame(this.id)"
-                                    src="assets/images/blank-button.jpg" alt="">
+                                    <img id="1" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
 
@@ -63,12 +63,12 @@
 
                             <td class="tiles">
 
-                              <div class="card">
+                              <div id="card2">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-2" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                    <img id="2" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
 
@@ -76,12 +76,12 @@
 
                             <td class="tiles">
 
-                              <div class="card">
+                              <div id="card3">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-3" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                <img id="3" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
                             </td>
@@ -90,34 +90,34 @@
 
                         <tr>
                             <td class="tiles">
-                              <div class="card">
+                              <div id="card4">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-4" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                    <img id="4" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
                             <td class="tiles">
-                              <div class="card">
-                                <div class="front">
-                                  <!-- <p>FRONT CONTENT</p> -->
+                              <div id="card5">
+                                  <div class="front">
+                                    <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-5" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                    <img id="5" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
                             <td class="tiles">
-                              <div class="card">
+                              <div id="card6">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-6" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                    <img id="6" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
                             </td>
@@ -125,34 +125,34 @@
     <!-- Third Row -->
                         <tr>
                             <td class="tiles">
-                              <div class="card">
+                              <div id="card7">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-7" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                    <img id="7" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
                             <td class="tiles">
-                              <div class="card">
+                              <div id="card8">
                                 <div class="front">
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
-                                <div onClick="playGame(this.id)" class="back">
-                                  <img id="tile-8" src="assets/images/blank-button.jpg" alt="">
+                                <div class="back">
+                                    <img id="8" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                 </div>
                               </div>
                             </td>
 
                               <td class="tiles">
-                                <div class="card">
+                                <div id="card9">
                                   <div class="front">
                                     <!-- <p>FRONT CONTENT</p> -->
-                                  </div>
-                                  <div onClick="playGame(this.id)" class="back">
-                                    <img id="tile-9" src="assets/images/blank-button.jpg" alt="">
+                                </div>
+                                <div class="back">
+                                    <img id="9" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
                                   </div>
                                 </div>
                             </td>
@@ -177,6 +177,13 @@
             </div>
 
     </div>
+
+<!-- <script>
+    $('.card').flip({
+        axis: "y",
+        trigger: "click"
+    });
+</script> -->
 
 </body>
 </html>

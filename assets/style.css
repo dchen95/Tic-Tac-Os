@@ -9,6 +9,7 @@
 #header {
     background: skyblue;
     height: 120px;
+    text-align: center;
 }
 
 /* flexbox - gameboard */
@@ -73,6 +74,11 @@ p {
 h1 {
   font-size: 60px;
   font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+}
+
+h2 {
+  font-size: 40px;
+  color: darkblue;
 }
 
 /* player 1/2 text box */
