@@ -55,7 +55,7 @@ function playGame(clickedId) {
         console.log('currentState:  ' + currentState);
         
         $('#' + clickedId).attr('src', 'assets/images/xbutton.jpg'); // assign "X" image to img-src
-        flipCard(clickedId);
+        flipSquare(clickedId);
         
         currentPlayer = 2;
         console.log("currentPlayer switched to: " + currentPlayer);
@@ -68,7 +68,7 @@ function playGame(clickedId) {
         console.log('currentState:  ' + currentState);
 
         $('#' + clickedId).attr('src', 'assets/images/obutton.jpg'); // assign "O" image to img-src
-        flipCard(clickedId);
+        flipSquare(clickedId);
         
         currentPlayer = 1;
         console.log("currentPlayer switched to: " + currentPlayer);
@@ -131,20 +131,20 @@ function loadWinningCombos() {
     winningCombos.push([2, 4, 6]);
 };
 
-function flipCard(clickedId) {
-    console.log("clickedId in flipCard: " + clickedId);
-    var currentCard = $('#card' + clickedId).text;
-    console.log(currentCard);
+function flipSquare(clickedId) {
+    console.log("clickedId in flipSquare: " + clickedId);
+    var currentSquareId = $('#square' + clickedId).attr('id'); // display id of square clicked
+    console.log(currentSquareId);
     
-    
-    
-    $('#card' + clickedId).flip({
+    $('#square' + clickedId).flip({
         axis: "y",
         trigger: "click"
     })
 };
 
 
-function resetBoard () {
-    
+function resetBoard() {
+    for (i=0; i<10; i++) {
+        $('#square' + i).attr(src)
+    }    
 }
