@@ -10,6 +10,8 @@
   firebase.initializeApp(config);
 
 var database = firebase.database();
+var game = firebase.ref("/game_stats");
+
 
 // Branches to store each player's actions
 var player1 = database.ref("/player1");
@@ -35,10 +37,26 @@ var gameOver = 0;
 
 loadWinningCombos();
 console.log(winningCombos);
+//==================================================
 
+function Xbutton(){
+    $('.back').append('<img src="assets/images/Xbutton.jpg" alt="">');
+    $(".card").flip({
+        axis: "y",
+        trigger: "click"
+      });
+}
+function Obutton(){
+    $('.back').append('<img src="assets/images/Obutton.jpg" alt="">');
+    $(".card").flip({
+        axis: "y",
+        trigger: "click"
+      });
+}
 
 //==================================================
 
+database.ref().on("value", function(snapshot) {
 
 function playGame(clickedId) {
     console.log("Button clicked # " + clickedId);
@@ -52,8 +70,8 @@ function playGame(clickedId) {
     if (currentPlayer == 1) {
         
         console.log('clickedId = ' + clickedId); // display number of box clicked
-        $('#' + clickedId).text("X"); // flip this box to "X" image
-                
+        // $('#'+ clickedId).append('<img src="assets/images/Xbutton.jpg" alt="">'); // flip this box to "X" image
+        Xbutton();
         currentState.splice(clickedId, 1, "X");  // save play in array position [clickedID]
         console.log('currentState:  ' + currentState);
 
@@ -61,12 +79,13 @@ function playGame(clickedId) {
     }
     else {
         // mark "O" for Player 2
-        $('#' + clickedId).text("O");
+        // $('#'+ clickedId).append('<img src="assets/images/Obutton.jpg" alt="">'); // flip this box to "O" image
+        Obutton();
         currentState.splice(clickedId, 1, "O"); // save play in array position [clickedID]
         console.log('currentState:  ' + currentState);
         currentPlayer = 1;
     }
-
+    
     if (numberMoves > 4) { // only start checking after 5 clicks
         for (var i = 0; i < winningCombos.length; i++) {
                 var a = winningCombos[i][0];
@@ -85,6 +104,7 @@ function playGame(clickedId) {
                     (currentState[c] == "X"))
                     {
                     $('#subtitle').text("Player 1 wins");
+                    console.log("p1 wins");
                     gameOver = 1;
                     break;
                 }
@@ -94,6 +114,7 @@ function playGame(clickedId) {
                     (currentState[c] == "O"))
                     {
                     $('#subtitle').text("Player 2 wins");
+                    console.log("p2 wins");
                     gameOver = 1;
                     break;
                 }
@@ -106,7 +127,19 @@ function playGame(clickedId) {
         };
     }
 
-}
+}});
+
+database.ref().push({
+
+winsets: winningCombos,
+current: currentState,
+player: currentPlayer,
+p1: player1score,
+p2: player2score,
+moves: numberMoves,
+end: gameOver,
+
+});
 function loadWinningCombos() {
     winningCombos.push([0, 1, 2]);
     winningCombos.push([3, 4, 5]);
@@ -117,4 +150,3 @@ function loadWinningCombos() {
     winningCombos.push([0, 4, 8]);
     winningCombos.push([2, 4, 6]);
 };
-
