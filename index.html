@@ -31,20 +31,30 @@
                 <h2 id="subtitle">Click to start!</h2>
             </header>
 
-        <!-- Main Content (Game Board) -->
+        <!-- ########## Main Content (Game Board / Chat Box) ########### -->
             <div id="main-content" class="container">
-                <div id="player1">
+                <div id="players">
                     <h1 id="x">X</h1>
                     <br>
                     <p>Player 1</p>
-                    <!-- <div>
-                        <form>
-                          <label for="fname">Name</label>
-                          <input type="text" id="fname" name="firstname" placeholder="Player 1">
-                          <input type="submit" value="Submit">
+                    <div>
+                        <form action="#" method="post">
+                          <input type="text" id="name" name="player_1">
+                          <button type="submit">Submit</button>
                         </form>
-                      </div> -->
+                      </div> 
+
+                    <h1 id="o">O</h1>
+                    <br>
+                    <p>Player 2</p>
+                    <div>
+                        <form action="#" method="post">
+                            <input type="text" id="name" name="player_1">
+                            <button type="submit">Submit</button>
+                        </form>
+                        </div> 
                 </div>
+
                 <div id="game-board">
                     <!-- Gameboard as <table> goes here -->
                     <table id="game-board-table">
@@ -56,7 +66,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="1" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="1" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
 
@@ -69,7 +79,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="2" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="2" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
 
@@ -82,7 +92,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                <img id="3" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                <img id="3" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
                             </td>
@@ -96,7 +106,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="4" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="4" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
                             </td>
@@ -107,7 +117,7 @@
                                     <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="5" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="5" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
                             </td>
@@ -118,7 +128,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="6" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="6" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
                             </td>
@@ -131,7 +141,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="7" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="7" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
                             </td>
@@ -142,7 +152,7 @@
                                   <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="8" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="8" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                 </div>
                               </div>
                             </td>
@@ -153,7 +163,7 @@
                                     <!-- <p>FRONT CONTENT</p> -->
                                 </div>
                                 <div class="back">
-                                    <img id="9" onmousedown="playGame(this.id)" src="assets/images/blank-button.jpg" alt="">
+                                    <img id="9" onmousedown="playGame(this.id)" src="assets/images/blank.png" alt="">
                                   </div>
                                 </div>
                             </td>
@@ -169,13 +179,34 @@
                     <!-- <div class="tile-9 tiles">9</div> -->
                     </table>
                 </div>
-                <div id="player2">
-                    <h1 id="o">O</h1>
-                    <br>
-                    <p>Player 2</p>
+
+                <div id="chat-box" class="container">
+                    <div class="chatlogs">
+
+                        <div class="chat x">
+                            <div id="user-x" class="chat-name">player1</div>
+                            <p class="chat-message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur reiciendis incidunt repellendus animi vero dolores nulla accusamus corporis inventore? Quod error nostrum, neque ipsa illum perferendis! Natus tenetur recusandae repellendus?</p>
+                        </div>
+                        <div class="chat o">
+                            <div id="user-o" class="chat-name">player2</div>
+                            <p class="chat-message">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem adipisci inventore unde quod dolores explicabo quam, hic voluptate debitis magni ipsa laboriosam fugit vitae vel minima distinctio, odit quasi quisquam?</p>
+                        </div>
+                        <div class="chat x">
+                            <div id="user-x" class="chat-name">player1</div>
+                            <p class="chat-message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur reiciendis incidunt repellendus animi vero dolores nulla accusamus corporis inventore? Quod error nostrum, neque ipsa illum perferendis! Natus tenetur recusandae repellendus?</p>
+                        </div>
+                        <div class="chat o">
+                            <div id="user-o" class="chat-name">player2</div>
+                            <p class="chat-message">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem adipisci inventore unde quod dolores explicabo quam, hic voluptate debitis magni ipsa laboriosam fugit vitae vel minima distinctio, odit quasi quisquam?</p>
+                        </div>
+
+                    </div>
+
+                    <div class="chat-form">
+                        <textarea></textarea>
+                        <button>Send</button>
+                    </div>
                 </div>
-                </div>
-            </div>
 
     </div>
 

@@ -54,7 +54,7 @@ function playGame(clickedId) {
         currentState.splice((clickedId-1), 1, "X");  // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
         
-        $('#' + clickedId).attr('src', 'assets/images/xbutton.jpg'); // assign "X" image to img-src
+        $('#' + clickedId).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
         flipSquare(clickedId);
         
         currentPlayer = 2;
@@ -67,7 +67,7 @@ function playGame(clickedId) {
         currentState.splice((clickedId-1), 1, "O"); // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
 
-        $('#' + clickedId).attr('src', 'assets/images/obutton.jpg'); // assign "O" image to img-src
+        $('#' + clickedId).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
         flipSquare(clickedId);
         
         currentPlayer = 1;
