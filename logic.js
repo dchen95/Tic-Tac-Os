@@ -10,7 +10,7 @@
   firebase.initializeApp(config);
 
 var database = firebase.database();
-var game = firebase.ref("/game_stats");
+var game = database.ref("/game_stats");
 
 
 // Branches to store each player's actions
@@ -34,7 +34,16 @@ var gameOver = 0;
 // Accept players' names input
 // player1Name = $('#player1-name').text().trim();
 // player2Name = $('#player2-name').text().trim();
-
+function loadWinningCombos() {
+    winningCombos.push([0, 1, 2]);
+    winningCombos.push([3, 4, 5]);
+    winningCombos.push([6, 7, 8]);
+    winningCombos.push([0, 3, 6]);
+    winningCombos.push([1, 4, 7]);
+    winningCombos.push([2, 5, 8]);
+    winningCombos.push([0, 4, 8]);
+    winningCombos.push([2, 4, 6]);
+};
 loadWinningCombos();
 console.log(winningCombos);
 //==================================================
@@ -56,8 +65,6 @@ function Obutton(){
 
 //==================================================
 
-database.ref().on("value", function(snapshot) {
-
 function playGame(clickedId) {
     console.log("Button clicked # " + clickedId);
     console.log("currentPlayer: " + currentPlayer);
@@ -65,10 +72,10 @@ function playGame(clickedId) {
     numberMoves++;
 
     console.log("currentPlayer:  " + currentPlayer);
-    
+
     // mark "X" for Player 1
     if (currentPlayer == 1) {
-        
+
         console.log('clickedId = ' + clickedId); // display number of box clicked
         // $('#'+ clickedId).append('<img src="assets/images/Xbutton.jpg" alt="">'); // flip this box to "X" image
         Xbutton();
@@ -84,8 +91,56 @@ function playGame(clickedId) {
         currentState.splice(clickedId, 1, "O"); // save play in array position [clickedID]
         console.log('currentState:  ' + currentState);
         currentPlayer = 1;
-    }
-    
+    }};
+
+database.ref(game).on("value", function(snapshot) {
+  if (currentPlayer == 2){
+    playGame(snapshot);
+}
+else {console.log('your turn ...');}
+// function playGame(clickedId) {
+//     console.log("Button clicked # " + clickedId);
+//     console.log("currentPlayer: " + currentPlayer);
+//
+//     numberMoves++;
+//
+//     console.log("currentPlayer:  " + currentPlayer);
+//
+//     // mark "X" for Player 1
+//     if (currentPlayer == 1) {
+//
+//         console.log('clickedId = ' + clickedId); // display number of box clicked
+//         // $('#'+ clickedId).append('<img src="assets/images/Xbutton.jpg" alt="">'); // flip this box to "X" image
+//         Xbutton();
+//         currentState.splice(clickedId, 1, "X");  // save play in array position [clickedID]
+//         console.log('currentState:  ' + currentState);
+//
+//         currentPlayer = 2;
+//     }
+//     else {
+//         // mark "O" for Player 2
+//         // $('#'+ clickedId).append('<img src="assets/images/Obutton.jpg" alt="">'); // flip this box to "O" image
+//         Obutton();
+//         currentState.splice(clickedId, 1, "O"); // save play in array position [clickedID]
+//         console.log('currentState:  ' + currentState);
+//         currentPlayer = 1;
+//     }
+
+    database.ref(game).set({
+      CurrentP:currentState,
+    });
+    database.ref(game).push({
+
+    winsets: winningCombos,
+    current: currentState,
+    player: currentPlayer,
+    p1: player1score,
+    p2: player2score,
+    moves: numberMoves,
+    end: gameOver,
+
+    });
+
     if (numberMoves > 4) { // only start checking after 5 clicks
         for (var i = 0; i < winningCombos.length; i++) {
                 var a = winningCombos[i][0];
@@ -97,7 +152,7 @@ function playGame(clickedId) {
                 console.log("currentState[a]" + currentState[a]);
                 console.log("currentState[b]" + currentState[b]);
                 console.log("currentState[c]" + currentState[c]);
-                
+
 
                 if ((currentState[a] == "X") &&
                     (currentState[b] == "X") &&
@@ -108,7 +163,7 @@ function playGame(clickedId) {
                     gameOver = 1;
                     break;
                 }
-                else if 
+                else if
                     ((currentState[a] == "O") &&
                     (currentState[b] == "O") &&
                     (currentState[c] == "O"))
@@ -126,27 +181,4 @@ function playGame(clickedId) {
             $('#subtitle').text("It's a tie!");
         };
     }
-
-}});
-
-database.ref().push({
-
-winsets: winningCombos,
-current: currentState,
-player: currentPlayer,
-p1: player1score,
-p2: player2score,
-moves: numberMoves,
-end: gameOver,
-
 });
-function loadWinningCombos() {
-    winningCombos.push([0, 1, 2]);
-    winningCombos.push([3, 4, 5]);
-    winningCombos.push([6, 7, 8]);
-    winningCombos.push([0, 3, 6]);
-    winningCombos.push([1, 4, 7]);
-    winningCombos.push([2, 5, 8]);
-    winningCombos.push([0, 4, 8]);
-    winningCombos.push([2, 4, 6]);
-};
