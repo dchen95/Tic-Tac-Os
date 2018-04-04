@@ -4,6 +4,7 @@
   font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
   box-sizing: border-box;
   background: #3C198D;
+  color: #ffffff;
   
 }
 #page-container {
@@ -15,7 +16,7 @@
 
 #header {
     background: #3C198D;
-    height: 120px;
+    height: 200px;
     text-align: center;
 }
 
@@ -31,8 +32,13 @@
   background: #3C198D;
 }
 
-#players {
- 
+.score {
+  margin: 20px 20px 20px 20px;
+}
+#player_xo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #game-board {
@@ -125,7 +131,7 @@ div {
 
 /* --------------- Chat Box -------------- */
 
-#chat-box {
+/* #chat-box {
   width: 400px;
   min-width: 390px;
   height: 360px;
@@ -225,7 +231,7 @@ div {
   font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
   color: #ffffff;
 }
-
+ */
 
 #player1 {
 

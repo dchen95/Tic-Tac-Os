@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     <title>Tic-Tac-Os</title>
-    <!-- Framework links that Malik found goes here-->
     <!-- Firebase reference -->
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     
@@ -26,33 +25,28 @@
         <!-- Header -->
             <header id="header" class="main-header text-center">
                 <!-- insert logo image here -->
-                <h1>Tic-Tac-Os</h1>
+                <img src="assets/images/title.png">
                 <p>An interactive Tic-Tac-Toe game that you can play against other people in the world.</p>
-                <h2 id="subtitle">Click to start!</h2>
+                <br>
+                <p id="subtitle">Click the board to start!</p>
             </header>
 
         <!-- ########## Main Content (Game Board / Chat Box) ########### -->
             <div id="main-content" class="container">
-                <div id="players">
-                    <h1 id="x">X</h1>
-                    <br>
-                    <p>Player 1</p>
+                <div id="player_xo">
                     <div>
+                    <img src="assets/images/x_p1.png">
+                    <center><p>Player 1</p></center>
+                    </div>
+                    <!-- <div>
                         <form action="#" method="post">
                           <input type="text" id="name" name="player_1">
                           <button type="submit">Submit</button>
                         </form>
-                      </div> 
-
-                    <h1 id="o">O</h1>
-                    <br>
-                    <p>Player 2</p>
-                    <div>
-                        <form action="#" method="post">
-                            <input type="text" id="name" name="player_1">
-                            <button type="submit">Submit</button>
-                        </form>
-                        </div> 
+                    </div> -->
+                    <div class="score">
+                        <h1 id="score-x">00</h1>
+                    </div> 
                 </div>
 
                 <div id="game-board">
@@ -168,19 +162,26 @@
                                 </div>
                             </td>
                         </tr>
-                    <!-- <div class="tile-1 tiles">1</div> -->
-                    <!-- <div class="tile-2 tiles">2</div> -->
-                    <!-- <div class="tile-3 tiles">3</div> -->
-                    <!-- <div class="tile-4 tiles">4</div> -->
-                    <!-- <div class="tile-5 tiles">5</div> -->
-                    <!-- <div class="tile-6 tiles">6</div> -->
-                    <!-- <div class="tile-7 tiles">7</div> -->
-                    <!-- <div class="tile-8 tiles">8</div> -->
-                    <!-- <div class="tile-9 tiles">9</div> -->
                     </table>
                 </div>
 
-                <div id="chat-box" class="container">
+                <div id="player_xo">
+                    <div>
+                    <img src="assets/images/o_p2.png">
+                    <center><p>Player 2</p></center>
+                    </div>
+                    <!-- <div>
+                        <form action="#" method="post">
+                            <input type="text" id="name" name="player_1">
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div> -->
+                    <div class="score">
+                        <h1 id="score-o">00</h1>
+                    </div> 
+                </div>
+
+               <!--  <div id="chat-box" class="container">
                     <div class="chatlogs">
 
                         <div class="chat x">
@@ -206,7 +207,7 @@
                         <textarea></textarea>
                         <button>Send</button>
                     </div>
-                </div>
+                </div> -->
 
     </div>
 
