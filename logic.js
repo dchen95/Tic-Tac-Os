@@ -1,19 +1,22 @@
 // Initialize Firebase
-// var config = {
-//     apiKey: "AIzaSyCFsMk-UOJWmYptPKgD46tV6ONa-AtrEBA",
-//     authDomain: "tic-tac-os.firebaseapp.com",
-//     databaseURL: "https://tic-tac-os.firebaseio.com",
-//     projectId: "tic-tac-os",
-//     storageBucket: "tic-tac-os.appspot.com",
-//     messagingSenderId: "622288172534"
-// };
-// firebase.initializeApp(config);
-    
-// var database = firebase.database();
+var config = {
+    apiKey: "AIzaSyCFsMk-UOJWmYptPKgD46tV6ONa-AtrEBA",
+    authDomain: "tic-tac-os.firebaseapp.com",
+    databaseURL: "https://tic-tac-os.firebaseio.com",
+    projectId: "tic-tac-os",
+    storageBucket: "tic-tac-os.appspot.com",
+    messagingSenderId: "622288172534"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+var game = database.ref("/game_stats");
 
 // Branches to store each player's actions
-// var player1 = database.ref("/player1");
-// var player2 = database.ref("/player2");
+var player1 = database.ref("/player1");
+var player2 = database.ref("/player2");
+
+player1.set(true)
 
 // Variables for players' names
 var player1Name;
@@ -40,6 +43,10 @@ console.log("Loaded winningCombos: " + winningCombos);
 
 //==================================================
 
+game.on("value", function(snapshot) {
+    console.log(snapshot.val());
+    
+});
 
 function playGame(clickedId) {
     console.log("clickedId = " + clickedId); // display number of box clicked
@@ -48,14 +55,15 @@ function playGame(clickedId) {
     gameStop = 0;
     numberMoves++;
   
+    
     // mark "X" for Player 1
     if (currentPlayer == 1) {
-                      
+        
         currentState.splice((clickedId-1), 1, "X");  // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
         
-        $('#' + clickedId).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
-        flipSquare(clickedId);
+        // $('#' + clickedId).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
+        // flipSquare(clickedId);
         
         currentPlayer = 2;
         console.log("currentPlayer switched to: " + currentPlayer);
@@ -63,18 +71,29 @@ function playGame(clickedId) {
     }
     else {
         // mark "O" for Player 2
-
+        
         currentState.splice((clickedId-1), 1, "O"); // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
-
+        
         $('#' + clickedId).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
         flipSquare(clickedId);
         
         currentPlayer = 1;
         console.log("currentPlayer switched to: " + currentPlayer);
-
+        
     }
-
+    
+    game.set({
+        currentStateF: currentState,
+        currentPlayerF: currentPlayer,
+        player1scoreF: player1score,
+        player2scoreF: player2score,
+        numberMovesF: numberMoves,
+        gameStopF: gameStop,
+        clickedIdF: clickedId
+    })
+    
+    
     if (numberMoves > 4) { // only start checking after 5 clicks
         for (var i = 0; i < winningCombos.length; i++) {
             // compare currentState array with all winningCombos nested arrays to test for match
