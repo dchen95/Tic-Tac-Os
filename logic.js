@@ -175,10 +175,10 @@ function flipSquare(clickedId) {
     console.log("clickedId in flipSquare: " + clickedId);
     var currentSquareId = $('#square' + clickedId).attr('id'); // display id of square clicked
     console.log(currentSquareId);
-
+    $('#square' + clickedId).flip(true);
         $('#square' + clickedId).flip({
             axis: "y",
-            trigger: "click"
+            trigger: "manual"
         })
 };
 
