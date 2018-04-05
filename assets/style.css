@@ -39,6 +39,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+}
+
+#p1-city {
+  color: #c22db2;
+}
+
+#p2-city {
+  color: #21dbe0;
 }
 
 #game-board {

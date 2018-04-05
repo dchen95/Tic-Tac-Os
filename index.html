@@ -10,6 +10,7 @@
 
     <!-- JavaScript / JQuery-->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="api.js"></script>
     <script src="logic.js"></script>
     
     <!-- Flip functionality -->
@@ -36,14 +37,12 @@
                 <div id="player_xo">
                     <div>
                     <img src="assets/images/x_p1.png">
-                    <center><p>Player 1</p></center>
                     </div>
-                    <!-- <div>
-                        <form action="#" method="post">
-                          <input type="text" id="name" name="player_1">
-                          <button type="submit">Submit</button>
-                        </form>
-                    </div> -->
+                    <div>
+                    <center><p>Player 1</p></center>
+                    <br>
+                    <center><p id="p1-city"></p></center>
+                    </div>
                     <div class="score">
                         <h1 id="score-x">00</h1>
                     </div> 
@@ -168,7 +167,11 @@
                 <div id="player_xo">
                     <div>
                     <img src="assets/images/o_p2.png">
+                    </div>
+                    <div>
                     <center><p>Player 2</p></center>
+                    <br>
+                    <center><p id="p2-city"></p></center>
                     </div>
                     <!-- <div>
                         <form action="#" method="post">
