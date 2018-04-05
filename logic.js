@@ -51,39 +51,61 @@ function loadWinningCombos() {
 
 //==================================================
 
+game.on("value", function(snapshot) {
+    // console.log("snapshot.val():  " + snapshot.val());
+    // console.log("game.currentPlayerF:  " + game.currentPlayerF);
+    var clickedIdF = snapshot.val().clickedIdF;
+    var currentPlayerF = snapshot.val().currentPlayerF
+    console.log("CurrentCLickID:" + clickedIdF);
+    console.log("CurrentPlayer:" + currentPlayerF);
+
+    if ((currentPlayerF)== 2) {
+        $('#' + clickedIdF).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
+        flipSquare(clickedIdF);
+  }
+
+    else if ((currentPlayerF) == 1) {
+        $('#' + clickedIdF).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
+        flipSquare(clickedIdF);
+  }
+},function(errorObject) {
+console.log("The read failed: " + errorObject.code);
+});
+
+
 function playGame(clickedId) {
     console.log("clickedId = " + clickedId); // display number of box clicked
-    console.log("currentPlayer: " + currentPlayer);    
+    console.log("currentPlayer: " + currentPlayer);
 
     gameStop = 0;
     numberMoves++;
-      
+
     // update board array (currentState)
     if (currentPlayer == 1) {
-        
+
         currentState.splice((clickedId-1), 1, "X");  // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
-        
+
         // $('#' + clickedId).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
         // flipSquare(clickedId);
 
         currentPlayer = 2;
         console.log("currentPlayer switched to: " + currentPlayer);
-        
+
 
     }
-    else {       
+    else {
         currentState.splice((clickedId-1), 1, "O"); // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
-        
+
         // $('#' + clickedId).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
         // flipSquare(clickedId);
-        
+
         currentPlayer = 1;
         console.log("currentPlayer switched to: " + currentPlayer);
-        
+
     }
-    
+
     // write values to Firebase
     game.set({
         currentStateF: currentState,
@@ -95,7 +117,7 @@ function playGame(clickedId) {
         clickedIdF: clickedId
     });
 
-    
+
     // determine if there's a winner
     if (numberMoves > 4) { // only start checking after 5 clicks
         for (var i = 0; i < winningCombos.length; i++) {
@@ -121,7 +143,7 @@ function playGame(clickedId) {
                 numberMoves = 0;  // resets moves counter
                 break;
             }
-            else if 
+            else if
             ((currentState[a] == "O") &&
             (currentState[b] == "O") &&
             (currentState[c] == "O"))
@@ -133,7 +155,7 @@ function playGame(clickedId) {
                 numberMoves = 0; // resets moves counter
                 break;
             }
-            
+
             else if ((numberMoves == 9) && (gameStop == 0)) {  // conditions for a tie
                 $('#subtitle').text("It's a tie!");
                 gameStop = 1;
@@ -143,24 +165,8 @@ function playGame(clickedId) {
             }
         }
     }
+  };
     // detect changes in Firebase and update screen accordingly
-    game.on("value", function(snapshot) {
-        console.log("snapshot.val():  " + snapshot.val());
-        console.log("game.currentPlayerF:  " + game.currentPlayerF);
-        
-    
-        if (game.currentPlayerF == 1) {
-            $('#' + clickedId).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
-            flipSquare(clickedIdF);
-        }
-        
-        if (game.currentPlayerF == 2) {
-            $('#' + clickedId).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
-            flipSquare(clickedIdF);
-        }
-    });
-    
-}
 
 
 
@@ -169,7 +175,7 @@ function flipSquare(clickedId) {
     console.log("clickedId in flipSquare: " + clickedId);
     var currentSquareId = $('#square' + clickedId).attr('id'); // display id of square clicked
     console.log(currentSquareId);
-    
+
         $('#square' + clickedId).flip({
             axis: "y",
             trigger: "click"
@@ -177,8 +183,8 @@ function flipSquare(clickedId) {
 };
 
 
-function resetBoard() {
-    for (i=0; i<10; i++) {
-        $('#square' + i).attr(src)
-    }    
-}
+// function resetBoard() {
+//     for (i=0; i<10; i++) {
+//         $('#square' + i).attr(src)
+//     }
+// }
