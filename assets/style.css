@@ -50,12 +50,17 @@
   color: #21dbe0;
 }
 
-#game-board {
- 
-
+#reset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 25px;
 }
-#chat-box {
-  
+
+#reset-button {
+  padding: 10px 10px;
+  border-radius: 5px;
 }
 
 table, tr {

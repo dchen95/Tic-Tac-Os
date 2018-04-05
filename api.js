@@ -1,5 +1,7 @@
 // ------ MessageBird (chat) API ----------
+
 //var apiKey = "live_6HTXgyC6hGaiDa5NnAhcCJumO"
+//var chatURL = 
 
 
 // ------ IP-API ----------
