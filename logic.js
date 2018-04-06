@@ -12,6 +12,90 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var game = database.ref("/game_stats");
 
+// var connections = database.ref("/players");
+var moves = database.ref("/moves");
+
+var players = database.ref("/players");
+var connectionsRef = database.ref("/connections");
+var connectedRef = database.ref(".info/connected");
+
+var playerMarker = '';
+var myMove = false
+// var 
+
+connectionsRef.once('value', (snap) => {
+    console.log(snap.val());
+
+    if (!snap.val()) {
+        playerMarker = 'X'
+        myMove = true;
+        var con = connectionsRef.push(true);
+        con.onDisconnect().remove();
+    } else {
+        var connectionsList = Object.keys(snap.val()).map(key => snap.val()[key])
+
+        if (connectionsList.length === 1) {
+            var con = connectionsRef.push(true);
+            con.onDisconnect().remove();
+            playerMarker = 'O'
+        } 
+    }
+})
+
+connectionsRef.on('child_removed', () => {
+    database.ref().set({})
+    alert('the other player left');
+})
+
+// database.ref().on("value", function (snap) {
+//     var playersList = snap.val().players;
+
+//     if (!playersList) {
+//         playerMarker = 'X'
+        
+//         players.push({
+//             name: 'player1',
+//         })
+//     } else {
+//         var playersArray = Object.keys(playersList).map(key => playersList[key])
+
+//         if (playersArray.length === 1) {
+//             players.push({
+//                 name: 'player1',
+//             })
+
+//             playerMarker = 'O'
+//         } else if (playersArray.length > 1) {
+//             alert('the game is full');
+//         }
+//     }
+// });
+
+moves.on('child_added', (childSnap) => {
+    myMove = !myMove;
+    var move = childSnap.val();
+
+    console.log(move.position)
+    if (move.marker === 'X') {
+        $('#' + move.position).attr('src', 'assets/images/x.png');
+    } else {
+        $('#' + move.position).attr('src', 'assets/images/o.png');
+    }
+});
+
+
+players.on('child_removed', (childSnap) => {
+    console.log('adsfds')
+});
+
+// // When first loaded or when the connections list changes...
+// connectionsRef.on("value", function (snap) {
+
+
+    
+// });
+
+
 // Branches to store each player's actions
 var player1F = database.ref("/player1");
 var player2F = database.ref("/player2");
@@ -51,25 +135,77 @@ function loadWinningCombos() {
 
 //==================================================
 
-game.on("value", function(snapshot) {
+game.on("value", function (snapshot) {
+
+    if (!snapshot.val()) {
+        return;
+    }
+
     // console.log("snapshot.val():  " + snapshot.val());
     // console.log("game.currentPlayerF:  " + game.currentPlayerF);
     var clickedIdF = snapshot.val().clickedIdF;
     var currentPlayerF = snapshot.val().currentPlayerF
+    var numberMoveF = snapshot.val().numberMovesF;
+
     console.log("CurrentCLickID:" + clickedIdF);
     console.log("CurrentPlayer:" + currentPlayerF);
 
-    if ((currentPlayerF)== 2) {
-        $('#' + clickedIdF).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
-        flipSquare(clickedIdF);
-  }
+    // if ((currentPlayerF) == 2) {
+    //     $('#' + clickedIdF).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
+    //     // flipSquare(clickedIdF);
+    // }
 
-    else if ((currentPlayerF) == 1) {
-        $('#' + clickedIdF).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
-        flipSquare(clickedIdF);
-  }
-},function(errorObject) {
-console.log("The read failed: " + errorObject.code);
+    // else if ((currentPlayerF) == 1) {
+    //     $('#' + clickedIdF).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
+    //     // flipSquare(clickedIdF);
+    // }
+
+    if (numberMoveF > 4) { // only start checking after 5 clicks
+        for (var i = 0; i < winningCombos.length; i++) {
+            // compare currentState array with all winningCombos nested arrays to test for match
+            var a = winningCombos[i][0];
+            var b = winningCombos[i][1];
+            var c = winningCombos[i][2];
+            console.log("var a = " + a);
+            console.log("var b = " + b);
+            console.log("var c = " + c);
+            console.log("currentState[a] = " + currentState[a]);
+            console.log("currentState[b] = " + currentState[b]);
+            console.log("currentState[c] = " + currentState[c]);
+
+            if ((currentState[a] == "X") &&
+                (currentState[b] == "X") &&
+                (currentState[c] == "X")) {
+                $('#subtitle').text("Player 1 wins");
+                player1score++;  // add point to Player1
+                gameStop = 1;
+                currentPlayer = 0;
+                numberMoves = 0;  // resets moves counter
+                break;
+            }
+            else if
+            ((currentState[a] == "O") &&
+            (currentState[b] == "O") &&
+                (currentState[c] == "O")) {
+                $('#subtitle').text("Player 2 wins");
+                player2score++;  // add point to Player2
+                gameStop = 1;
+                currentPlayer = 0;
+                numberMoves = 0; // resets moves counter
+                break;
+            }
+
+            else if ((numberMoves == 9) && (gameStop == 0)) {  // conditions for a tie
+                $('#subtitle').text("It's a tie!");
+                gameStop = 1;
+                currentPlayer = 0;
+                numberMoves = 0; // resets moves counter
+                break;
+            }
+        }
+    }
+}, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
 });
 
 
@@ -80,10 +216,17 @@ function playGame(clickedId) {
     gameStop = 0;
     numberMoves++;
 
+    console.log(playerMarker)
+
+    if (myMove) {
+        moves.push({position: clickedId, marker: playerMarker})
+    }
+    
+
     // update board array (currentState)
     if (currentPlayer == 1) {
-
-        currentState.splice((clickedId-1), 1, "X");  // save play in array position 'clickedId-1'
+        
+        currentState.splice((clickedId - 1), 1, "X");  // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
 
         // $('#' + clickedId).attr('src', 'assets/images/x.png'); // assign "X" image to img-src
@@ -95,7 +238,7 @@ function playGame(clickedId) {
 
     }
     else {
-        currentState.splice((clickedId-1), 1, "O"); // save play in array position 'clickedId-1'
+        currentState.splice((clickedId - 1), 1, "O"); // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
 
         // $('#' + clickedId).attr('src', 'assets/images/o.png'); // assign "O" image to img-src
@@ -118,55 +261,53 @@ function playGame(clickedId) {
     });
 
 
-    // determine if there's a winner
-    if (numberMoves > 4) { // only start checking after 5 clicks
-        for (var i = 0; i < winningCombos.length; i++) {
-            // compare currentState array with all winningCombos nested arrays to test for match
-            var a = winningCombos[i][0];
-            var b = winningCombos[i][1];
-            var c = winningCombos[i][2];
-            console.log("var a = " + a);
-            console.log("var b = " + b);
-            console.log("var c = " + c);
-            console.log("currentState[a] = " + currentState[a]);
-            console.log("currentState[b] = " + currentState[b]);
-            console.log("currentState[c] = " + currentState[c]);
+    // // determine if there's a winner
+    // if (numberMoves > 4) { // only start checking after 5 clicks
+    //     for (var i = 0; i < winningCombos.length; i++) {
+    //         // compare currentState array with all winningCombos nested arrays to test for match
+    //         var a = winningCombos[i][0];
+    //         var b = winningCombos[i][1];
+    //         var c = winningCombos[i][2];
+    //         console.log("var a = " + a);
+    //         console.log("var b = " + b);
+    //         console.log("var c = " + c);
+    //         console.log("currentState[a] = " + currentState[a]);
+    //         console.log("currentState[b] = " + currentState[b]);
+    //         console.log("currentState[c] = " + currentState[c]);
 
-            if ((currentState[a] == "X") &&
-                (currentState[b] == "X") &&
-                (currentState[c] == "X"))
-                {
-                $('#subtitle').text("Player 1 wins");
-                player1score++;  // add point to Player1
-                gameStop = 1;
-                currentPlayer = 0;
-                numberMoves = 0;  // resets moves counter
-                break;
-            }
-            else if
-            ((currentState[a] == "O") &&
-            (currentState[b] == "O") &&
-            (currentState[c] == "O"))
-            {
-                $('#subtitle').text("Player 2 wins");
-                player2score++;  // add point to Player2
-                gameStop = 1;
-                currentPlayer = 0;
-                numberMoves = 0; // resets moves counter
-                break;
-            }
+    //         if ((currentState[a] == "X") &&
+    //             (currentState[b] == "X") &&
+    //             (currentState[c] == "X")) {
+    //             $('#subtitle').text("Player 1 wins");
+    //             player1score++;  // add point to Player1
+    //             gameStop = 1;
+    //             currentPlayer = 0;
+    //             numberMoves = 0;  // resets moves counter
+    //             break;
+    //         }
+    //         else if
+    //         ((currentState[a] == "O") &&
+    //         (currentState[b] == "O") &&
+    //             (currentState[c] == "O")) {
+    //             $('#subtitle').text("Player 2 wins");
+    //             player2score++;  // add point to Player2
+    //             gameStop = 1;
+    //             currentPlayer = 0;
+    //             numberMoves = 0; // resets moves counter
+    //             break;
+    //         }
 
-            else if ((numberMoves == 9) && (gameStop == 0)) {  // conditions for a tie
-                $('#subtitle').text("It's a tie!");
-                gameStop = 1;
-                currentPlayer = 0;
-                numberMoves = 0; // resets moves counter
-                break;
-            }
-        }
-    }
-  };
-    // detect changes in Firebase and update screen accordingly
+    //         else if ((numberMoves == 9) && (gameStop == 0)) {  // conditions for a tie
+    //             $('#subtitle').text("It's a tie!");
+    //             gameStop = 1;
+    //             currentPlayer = 0;
+    //             numberMoves = 0; // resets moves counter
+    //             break;
+    //         }
+    //     }
+    // }
+};
+// detect changes in Firebase and update screen accordingly
 
 
 
@@ -176,10 +317,10 @@ function flipSquare(clickedId) {
     var currentSquareId = $('#square' + clickedId).attr('id'); // display id of square clicked
     console.log(currentSquareId);
     $('#square' + clickedId).flip(true);
-        $('#square' + clickedId).flip({
-            axis: "y",
-            trigger: "manual"
-        })
+    $('#square' + clickedId).flip({
+        axis: "y",
+        trigger: "manual"
+    })
 };
 
 
