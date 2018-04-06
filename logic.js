@@ -25,8 +25,8 @@ var player2Name;
 var winningCombos = []; // stores winning combinations
 var currentState = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]; // current state of game board
 var currentPlayer = 1; // tracks whose turn it is -- set to zero when stopped
-var player1score = 0;
-var player2score = 0;
+var player1score = 00;
+var player2score = 00;
 var numberMoves = 0; // tracks total number clicks in game; calculations begin after 5 clicks
 var gameStop = 0;  // if this variable remains at "0" at game end, the game was a tie
 var clickedId; // store current div ID being clicked
@@ -141,6 +141,7 @@ function playGame(clickedId) {
                 gameStop = 1;
                 currentPlayer = 0;
                 numberMoves = 0;  // resets moves counter
+                $(".score-x").text(player1score+1);
                 break;
             }
             else if
@@ -153,6 +154,7 @@ function playGame(clickedId) {
                 gameStop = 1;
                 currentPlayer = 0;
                 numberMoves = 0; // resets moves counter
+                $(".score-o").text(player2score+1);
                 break;
             }
 
