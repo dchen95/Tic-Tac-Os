@@ -6,8 +6,9 @@ var config = {
     projectId: "osss-ad20b",
     storageBucket: "osss-ad20b.appspot.com",
     messagingSenderId: "199300245401"
-  };
+};
 firebase.initializeApp(config);
+
 
 var database = firebase.database();
 var game = database.ref("/game_stats");
@@ -17,6 +18,7 @@ var moves = database.ref("/moves");
 var players = database.ref("/players");
 var connectionsRef = database.ref("/connections");
 var connectedRef = database.ref("/viewer");
+var endthis = database.ref("/end");
 
 var playerMarker = '';
 var myMove = false
@@ -41,27 +43,28 @@ connectionsRef.once('value', (snap) => {
             playerMarker = 'O'
             $('#aniO').attr('src', 'assets/images/p2_on.png');
             alert('You are Player O')
-        } else if (connectionsList.length >= 2){
+        } else if (connectionsList.length >= 2) {
             var view = connectedRef.push(true);
             view.onDisconnect().remove();
             alert('the game is full, but you can watch!');
         }
         console.log(connectionsList.length);
     }
-    
+
 })
 
-connectedRef.on('value', (snap) =>{
+connectedRef.on('value', (snap) => {
     if (!snap.val()) {
         return;
     }
-    else{
-    $("#connected-viewers").text(snap.numChildren());}
+    else {
+        $("#connected-viewers").text(snap.numChildren());
+    }
 })
 
 
 
-connectionsRef.on('child_removed', () => {  
+connectionsRef.on('child_removed', () => {
     database.ref().set({})
     $('#subtitle').text("The other player has left game, you cannot play anymore. Please refresh");
 })
@@ -78,6 +81,12 @@ moves.on('child_added', (childSnap) => {
         $('#' + move.position).attr('src', 'assets/images/o.png');
     }
 });
+
+endthis.on('value', (snap) => {
+    for (var i = 0 ; i<=8 ; i++){
+        $('#' + i).attr('src', 'assets/images/blank.png');
+    }
+})
 
 
 players.on('child_removed', (childSnap) => {
@@ -136,4 +145,15 @@ function playGame(clickedId) {
         moves.push({ position: clickedId, marker: playerMarker })
     }
 };
+
+$(document).ready(function(){
+    $("#reset-button").on('click',function() {
+        endthis.set('1');
+        console.log("reset button has been clicked!");
+    });
+    });
+
+
+
+
 // detect changes in Firebase and update screen accordingly
