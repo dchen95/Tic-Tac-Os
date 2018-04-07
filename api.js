@@ -6,7 +6,7 @@
 
 // ------ IP-API ----------
 
-var queryURL = "http://ip-api.com/json";
+var queryURL = "https://ip-api.com/json";
 var p1Location;
 var p2Location;
 
