@@ -6,15 +6,14 @@ var config = {
     projectId: "tic-tac-os",
     storageBucket: "tic-tac-os.appspot.com",
     messagingSenderId: "622288172534"
-};
+  };
 firebase.initializeApp(config);
 
 var database = firebase.database();
 var game = database.ref("/game_stats");
 
-// var connections = database.ref("/players");
+// Contains Move Histories
 var moves = database.ref("/moves");
-
 var players = database.ref("/players");
 var connectionsRef = database.ref("/connections");
 var connectedRef = database.ref(".info/connected");
@@ -23,14 +22,15 @@ var playerMarker = '';
 var myMove = false
 // var 
 
+//Checks the connection 
 connectionsRef.once('value', (snap) => {
-    console.log(snap.val());
-
     if (!snap.val()) {
         playerMarker = 'X'
         myMove = true;
         var con = connectionsRef.push(true);
         con.onDisconnect().remove();
+        $('#aniX').attr('src', 'assets/images/p1_on.png');
+        alert('You are Player X')
     } else {
         var connectionsList = Object.keys(snap.val()).map(key => snap.val()[key])
 
@@ -38,7 +38,14 @@ connectionsRef.once('value', (snap) => {
             var con = connectionsRef.push(true);
             con.onDisconnect().remove();
             playerMarker = 'O'
-        } 
+            $('#aniO').attr('src', 'assets/images/p2_on.png');
+            alert('You are Player O')
+        } else if (connectionsList.length >= 2){
+            var con = connectionsRef.push(true);
+            con.onDisconnect().remove();
+            alert('the game is full, but you can watch!');
+        }
+        console.log(connectionsList.length);
     }
 
     $("#connected-viewers").text(snap.numChildren());
@@ -49,29 +56,6 @@ connectionsRef.on('child_removed', () => {
     $('#subtitle').text("The other player has left game");
 })
 
-// database.ref().on("value", function (snap) {
-//     var playersList = snap.val().players;
-
-//     if (!playersList) {
-//         playerMarker = 'X'
-        
-//         players.push({
-//             name: 'player1',
-//         })
-//     } else {
-//         var playersArray = Object.keys(playersList).map(key => playersList[key])
-
-//         if (playersArray.length === 1) {
-//             players.push({
-//                 name: 'player1',
-//             })
-
-//             playerMarker = 'O'
-//         } else if (playersArray.length > 1) {
-//             alert('the game is full');
-//         }
-//     }
-// });
 
 moves.on('child_added', (childSnap) => {
     myMove = !myMove;
@@ -94,7 +78,7 @@ players.on('child_removed', (childSnap) => {
 // connectionsRef.on("value", function (snap) {
 
 
-    
+
 // });
 
 
@@ -221,13 +205,13 @@ function playGame(clickedId) {
     console.log(playerMarker)
 
     if (myMove) {
-        moves.push({position: clickedId, marker: playerMarker})
+        moves.push({ position: clickedId, marker: playerMarker })
     }
-    
+
 
     // update board array (currentState)
     if (currentPlayer == 1) {
-        
+
         currentState.splice((clickedId - 1), 1, "X");  // save play in array position 'clickedId-1'
         console.log('currentState:  ' + currentState);
 
@@ -308,6 +292,29 @@ function playGame(clickedId) {
     //         }
     //     }
     // }
+    // database.ref().on("value", function (snap) {
+    //     var playersList = snap.val().players;
+
+    //     if (!playersList) {
+    //         playerMarker = 'X'
+
+    //         players.push({
+    //             name: 'player1',
+    //         })
+    //     } else {
+    //         var playersArray = Object.keys(playersList).map(key => playersList[key])
+
+    //         if (playersArray.length === 1) {
+    //             players.push({
+    //                 name: 'player1',
+    //             })
+
+    //             playerMarker = 'O'
+    //         } else if (playersArray.length > 1) {
+    //             alert('the game is full');
+    //         }
+    //     }
+    // });
 };
 // detect changes in Firebase and update screen accordingly
 
