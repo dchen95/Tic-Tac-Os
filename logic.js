@@ -47,6 +47,7 @@ connectionsRef.once('value', (snap) => {
             var view = connectedRef.push(true);
             view.onDisconnect().remove();
             alert('the game is full, but you can watch!');
+            $('#subtitle').text("You are only watching!");
         }
         console.log(connectionsList.length);
     }
