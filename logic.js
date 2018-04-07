@@ -40,11 +40,13 @@ connectionsRef.once('value', (snap) => {
             playerMarker = 'O'
         } 
     }
+
+    $("#connected-viewers").text(snap.numChildren());
 })
 
 connectionsRef.on('child_removed', () => {
     database.ref().set({})
-    alert('the other player left');
+    $('#subtitle').text("The other player has left game");
 })
 
 // database.ref().on("value", function (snap) {

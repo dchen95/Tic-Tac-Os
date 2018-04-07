@@ -272,12 +272,21 @@ div {
 }
  */
 
-#player1 {
+ .footer {
+  background: #301470;
+  color: white;
+  padding: 25px 0;
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  bottom:0;
+  width:100%;
+  height:55px;   
 
 }
 
-#player2 {
-
+.connected-viewers {
+  color: gold;
 }
 
 /* --------------- Media Queries -------------- */
