@@ -83,7 +83,7 @@ moves.on('child_added', (childSnap) => {
 });
 
 endthis.on('value', (snap) => {
-    for (var i = 0 ; i<=8 ; i++){
+    for (var i = 0 ; i<=9 ; i++){
         $('#' + i).attr('src', 'assets/images/blank.png');
     }
 })
