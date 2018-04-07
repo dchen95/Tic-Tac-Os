@@ -24,7 +24,6 @@
 
 #main-content {
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: row;
   flex-grow: 0;
   justify-content: space-around;
@@ -113,7 +112,6 @@ td {
 
 .front {
   background-color: #301470;
-  /* padding:0px; */
 }
 
 .card {
@@ -135,143 +133,6 @@ h2 {
   color: darkblue;
 }
 
-/* player 1/2 text box */
- 
-/* input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px; */
-
-
-/* --------------- Chat Box -------------- */
-
-/* #chat-box {
-  width: 400px;
-  min-width: 390px;
-  height: 360px;
-  background: #301470;
-  padding: 12px;
-  margin: 20px auto;  
-}
-
-.chatlogs {
-  padding: 10px;
-  width: 100%;
-  height: 350px;
-  background: #301470;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.chat {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
-  margin-bottom: 10px;
-  background: #301470;
-}
-
-.chat .chat-name {
-  width: 100px;
-  height: 20px;
-  background: transparent;
-  border-radius: 50%;
-
-}
-
-.chat .chat-message {
-  width: 80%;
-  padding: 15px;
-  margin: 5px 10px 0;
-  background: transparent;
-  border-radius: 10px;
-  color: black;
-  font-size: 14px;
-
-}
-
-.x .chat-message {
-  background: #c22db2;
-}
-
-.o .chat-message {
-  background: #21dbe0;
-  order: 0;
-}
-
-.chat-form {
-  margin-top: 20px;
-  display: flex;
-  align-items: flex-start;
-}
-
-.chat-form textarea {
-  background: 20px;
-  width: 75%;
-  height: 50px;
-  border: 1.5px solid #301470;
-  border-radius: 3px;
-  resize: none;
-  padding: 10px;
-  font-size: 16px;
-  color: #333333;
-}
-
-.chat-form textarea:focus {
-  background: #3C198D;
-}
-
-.chat-form button {
-  background: #301470;
-  padding: 5px 15px;
-  font-size: 20px;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  margin: 0 10px;
-  box-shadow: 0 1px 0 #000000;
-  cursor: pointer;
-}
-
-.chat-form button:hover {
-  background: #f0e31a;
-}
-
-#chat-box {
-  background: #301470;
-}
-
-.chat-name {
-  font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
-  color: #ffffff;
-}
- */
-
  .footer {
   background: #301470;
   color: white;
@@ -288,28 +149,3 @@ div {
 .connected-viewers {
   color: gold;
 }
-
-/* --------------- Media Queries -------------- */
-
-/* @media (min-width: 769px) {
-  .main-header {
-    display: flex;
-  .row{
-    width: 90%;
-    margin: 0 auto;
-  }
-  .tagline {
-    font-size: 1.4em;
-  }
-}
-
-@media (min-width: 1025px) {
-  .main-header,
-  .row{
-    width: 90%;
-    margin: 0 auto;
-  }
-  .tagline {
-    font-size: 1.4em;
-  }
-} */
